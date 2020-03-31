@@ -1,11 +1,24 @@
 #include <Adafruit_NeoMatrix.h>
 
+// Change these to fit your setup
 #define PIN D3
 #define WIDTH 16
 #define HEIGHT 8
 
-int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
+// Change this to match the desired colors
+// to display.  If using more/less than 5
+// different color options, change 5 in the
+// initialization for prettyColors
+const int prettyColors[5][3] = {
+  {200, 18, 18},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0}
+};
 
+// Init and config an internal data array plus the NeoMatrix
+int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
 Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   HEIGHT, WIDTH,
   PIN,
@@ -44,32 +57,6 @@ void changePixel(int x, int y, int r, int g, int b) {
 }
 
 void makePrettyColors() {
-  // Our selected "pretty color" options
-  int prettyColors[5][3] = { // [number_of_colors][r,g,b]
-//    {30,0,0},
-//    {0,20,0},
-//    {0,0,15}, // Dim
-//    {30,20,0},
-//    {0,30,20}
-//    {249, 199, 63},
-//    {255, 244, 70},
-//    {255, 78, 65}, // Bright
-//    {218, 51, 48},
-//    {162, 18, 18}
-     // Just red
-    {200, 18, 18},
-    {0, 0, 0}
-      // Just blue
-//      {0, 0, 255},
-//      {0, 0, 0}
-//      // Eric
-//      {88, 127, 135},
-//      {173, 132, 106},
-//      {243, 212, 149},
-//      {95, 165, 255},
-//      {108, 30, 37}
-  };
-
   // Pick a random pixel to change
   int x = random(HEIGHT);
   int y = random(WIDTH);
