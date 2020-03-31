@@ -1,12 +1,4 @@
 #include <Adafruit_NeoMatrix.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266mDNS.h>
-#include <WiFiUdp.h>
-#include <ArduinoOTA.h>
-
-// Replace with your network credentials
-const char* ssid = "SSID";
-const char* password = "PW";
 
 #define PIN D3
 #define WIDTH 16
@@ -25,45 +17,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
 void setup() {
   Serial.begin(115200);
   Serial.println("Booting");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
-    delay(5000);
-    ESP.restart();
-  }
-
-  // Port defaults to 8266
-  // ArduinoOTA.setPort(8266);
-
-  // Hostname defaults to esp8266-[ChipID]
-  // ArduinoOTA.setHostname("myesp8266");
-
-  // No authentication by default
-  // ArduinoOTA.setPassword((const char *)"123");
-
-  ArduinoOTA.onStart([]() {
-    Serial.println("Start");
-  });
-  ArduinoOTA.onEnd([]() {
-    Serial.println("\nEnd");
-  });
-  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
-  });
-  ArduinoOTA.onError([](ota_error_t error) {
-    Serial.printf("Error[%u]: ", error);
-    if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
-    else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
-    else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
-    else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
-    else if (error == OTA_END_ERROR) Serial.println("End Failed");
-  });
-  ArduinoOTA.begin();
-  Serial.println("Ready");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
-  
+    
   // Initialize the matrix
   Matrix.begin();
 
@@ -92,11 +46,28 @@ void changePixel(int x, int y, int r, int g, int b) {
 void makePrettyColors() {
   // Our selected "pretty color" options
   int prettyColors[5][3] = { // [number_of_colors][r,g,b]
-    {30,0,0},
-    {0,20,0},
-    {0,0,15},
-    {30,20,0},
-    {0,30,20}
+//    {30,0,0},
+//    {0,20,0},
+//    {0,0,15}, // Dim
+//    {30,20,0},
+//    {0,30,20}
+//    {249, 199, 63},
+//    {255, 244, 70},
+//    {255, 78, 65}, // Bright
+//    {218, 51, 48},
+//    {162, 18, 18}
+     // Just red
+    {200, 18, 18},
+    {0, 0, 0}
+      // Just blue
+//      {0, 0, 255},
+//      {0, 0, 0}
+//      // Eric
+//      {88, 127, 135},
+//      {173, 132, 106},
+//      {243, 212, 149},
+//      {95, 165, 255},
+//      {108, 30, 37}
   };
 
   // Pick a random pixel to change
