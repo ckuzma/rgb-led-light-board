@@ -1,7 +1,7 @@
 # rgb-led-light-board
 
 ![in-progress.gif](in-progress.gif)
-> Above is the current state of the board.  Yes, all it does currently is twinkle the lights with some predefined "random" colors.
+> Above is the board in its finished state.
 
 ## About
 
