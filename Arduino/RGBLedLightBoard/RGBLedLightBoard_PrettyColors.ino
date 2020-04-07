@@ -20,7 +20,7 @@ const int prettyColors[5][3] = {
 // Init and config an internal data array plus the NeoMatrix
 int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
 Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
-  HEIGHT, WIDTH,
+  WIDTH, HEIGHT,
   PIN,
   NEO_MATRIX_BOTTOM + NEO_MATRIX_RIGHT +
   NEO_MATRIX_ROWS   + NEO_MATRIX_ZIGZAG,
