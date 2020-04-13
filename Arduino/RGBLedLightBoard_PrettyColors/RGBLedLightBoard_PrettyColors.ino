@@ -10,8 +10,9 @@
 // different color options, change 5 in the
 // initialization for prettyColors
 const int prettyColors[5][3] = {
-  {200, 18, 18},
-  {0, 0, 0},
+//  {200, 18, 18}, // Red
+  {100, 100, 255},
+  {30, 30, 180},
   {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0}
@@ -33,18 +34,19 @@ void setup() {
     
   // Initialize the matrix
   Matrix.begin();
+//  Matrix.setBrightness(25);
 
   // Initialize the random seed
   randomSeed(2020);
 }
 
 void displayBoard() {
-  for(int x = 0; x < HEIGHT; x++){
-    for(int y = 0; y < WIDTH; y++) {
-      int r = displayArray[x][y][0];
-      int g = displayArray[x][y][1];
-      int b = displayArray[x][y][2];
-        Matrix.drawPixel(x, y, Matrix.Color(r, g, b));
+  for(int x = 0; x < WIDTH; x++){
+    for(int y = 0; y < HEIGHT; y++) {
+      int r = displayArray[y][x][0];
+      int g = displayArray[y][x][1];
+      int b = displayArray[y][x][2];
+      Matrix.drawPixel(x, y, Matrix.Color(r, g, b));
     }
   }
   Matrix.show();
