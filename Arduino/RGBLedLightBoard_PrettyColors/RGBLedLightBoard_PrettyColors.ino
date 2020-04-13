@@ -9,10 +9,10 @@
 // to display.  If using more/less than 5
 // different color options, change 5 in the
 // initialization for prettyColors
+const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 const int prettyColors[5][3] = {
-//  {200, 18, 18}, // Red
-  {100, 100, 255}, // Bright blue
-  {30, 30, 180}, // Dim blue
+  {37, 37, 218}, // Bright blue
+  {17, 17, 110}, // Darker blue
   {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0}
@@ -34,7 +34,7 @@ void setup() {
     
   // Initialize the matrix
   Matrix.begin();
-//  Matrix.setBrightness(25);
+  Matrix.setBrightness(BRIGHTNESS);
 
   // Initialize the random seed
   randomSeed(2020);
