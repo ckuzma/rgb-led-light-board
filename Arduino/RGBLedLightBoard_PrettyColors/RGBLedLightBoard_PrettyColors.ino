@@ -11,8 +11,8 @@
 // initialization for prettyColors
 const int prettyColors[5][3] = {
 //  {200, 18, 18}, // Red
-  {100, 100, 255},
-  {30, 30, 180},
+  {100, 100, 255}, // Bright blue
+  {30, 30, 180}, // Dim blue
   {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0}
