@@ -6,9 +6,6 @@
 #define HEIGHT 8
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 
-// Init internal place(s) to store what should be displayed
-int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
-
 // Aliens
 int alien1a[HEIGHT][WIDTH][3] = {{{0,0,0}, {0,0,0}, {0,0,0}, {0,255,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}},
 {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}},
