@@ -1,20 +1,11 @@
-// Adafruit_NeoMatrix example for single NeoPixel Shield.
-// Scrolls 'Howdy' across the matrix in a portrait (vertical) orientation.
-
-#include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
-#include <Adafruit_NeoPixel.h>
-#ifndef PSTR
- #define PSTR // Make Arduino Due happy
-#endif
+
 // Change these to fit your setup
 #define PIN D3
 #define WIDTH 16
 #define HEIGHT 8
 
-
-// Init and config an internal data array plus the NeoMatrix
-int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
+// Array initialization
 Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   WIDTH, HEIGHT,
   PIN,
@@ -23,9 +14,21 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_GRB           + NEO_KHZ800
   );
 
+// Text setup
+const char text[] = "happy hour";
+const int scroll_width = -65;
+const int color_count = 5;
 const uint16_t colors[] = {
-  Matrix.Color(0, 255, 0)
+  Matrix.Color(255,186,21),
+  Matrix.Color(249,251,79),
+  Matrix.Color(19,249,246),
+  Matrix.Color(64,166,250),
+  Matrix.Color(240,61,248)
  };
+
+// Some initial variable instantiations
+int x = Matrix.width();
+int pass = 0;
 
 void setup() {
   Matrix.begin();
@@ -34,16 +37,15 @@ void setup() {
   Matrix.setTextColor(colors[0]);
 }
 
-int x    = Matrix.width();
-int pass = 0;
-
 void loop() {
   Matrix.fillScreen(0);
   Matrix.setCursor(x, 0);
-  Matrix.print(F("hello"));
-  if(--x < -36) {
+  Matrix.print(text);
+  if(--x < scroll_width){
     x = Matrix.width();
-    if(++pass >= 1) pass = 0;
+    if(++pass >= color_count){
+      pass = 0;
+    }
     Matrix.setTextColor(colors[pass]);
   }
   Matrix.show();
