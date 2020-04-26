@@ -88,7 +88,7 @@ void loop()
     // subtract seventy years:
     //unsigned long epoch = secsSince1900 - seventyYears;
     epoch = secsSince1900 - seventyYears;
-    epoch = epoch - (hoursAdjust * 3600);
+    epoch = epoch + (hoursAdjust * 3600);
     // print Unix time:
     //Serial.println(epoch);
 
