@@ -21,4 +21,4 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 ### [RGBLedLightBoard_NeoFire](https://github.com/ckuzma/RGBLedLightBoard_NeoFire)
 
-> ![old_flame.gif](https://github.com/ckuzma/RGBLedLightBoard_NeoFire/raw/master/old_fire.gif)
+> ![new_flame.gif](https://github.com/ckuzma/RGBLedLightBoard_NeoFire/raw/master/new_fire.gif)
