@@ -17,4 +17,8 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 ### [Space_Invader](Arduino/RGBLedLightBoard_Space_Invader)
 
-![space_invader.gif](Arduino/RGBLedLightBoard_Space_Invader/space_invader.gif)
+>![space_invader.gif](Arduino/RGBLedLightBoard_Space_Invader/space_invader.gif)
+
+### [RGBLedLightBoard_NeoFire](https://github.com/ckuzma/RGBLedLightBoard_NeoFire)
+
+> ![old_flame.gif](https://github.com/ckuzma/RGBLedLightBoard_NeoFire/raw/master/old_fire.gif)
