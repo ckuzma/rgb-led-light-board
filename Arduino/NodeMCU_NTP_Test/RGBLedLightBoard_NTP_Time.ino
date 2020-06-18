@@ -14,7 +14,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_MATRIX_BOTTOM + NEO_MATRIX_RIGHT +
   NEO_MATRIX_ROWS   + NEO_MATRIX_ZIGZAG,
   NEO_GRB           + NEO_KHZ800
-  );
+);
 
 // WiFi and UTC adjust settings
 char ssid[]     = "Wave G Public WiFi";
@@ -31,7 +31,7 @@ byte packetBuffer[ NTP_PACKET_SIZE]; // Buffer to hold incoming and outgoing pac
 int lastRefreshSeconds = millis() / 1000;
 
 // Text display setup
-char text[]               = "00:00";
+String timeAsString       = "00:00";
 int SCROLL_PLACEHOLDER    = Matrix.width();
 const int SCROLL_WIDTH    = -35; // This was fit to the width of "00:00"
 const uint16_t TEXT_COLOR = Matrix.Color(64,166,250); // whiteish blue color
@@ -41,8 +41,7 @@ const uint16_t BG_COLOR   = Matrix.Color(255, 0, 0); // full red
 IPAddress timeServerIP; // time.nist.gov NTP server address
 WiFiUDP udp;
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.println();
@@ -72,64 +71,48 @@ void setup()
   Matrix.setBrightness(255);
 }
 
-void loop()
-{
+void loop() {
   // Place to save epoch
   unsigned long epoch;
-  
-  //get a random server from the pool
+
+  // Get a random NPT time server from the pool
   WiFi.hostByName(ntpServerName, timeServerIP); 
 
+  // Send NTP packet to time server and wait a bit to allow for a response
   sendNTPpacket(timeServerIP); // send an NTP packet to a time server
-  // wait to see if a reply is available
   delay(1000);
-  
+
+  // Check to see if we have received a data packet
   int cb = udp.parsePacket();
-  if (!cb) {
-    Serial.println("no packet yet");
+  if (!cb) { // If not...
+    Serial.println("No packet received yet");
   }
   else {
-    Serial.print("packet received, length=");
-    Serial.println(cb);
+    // Debug print some info
+    // Serial.print("packet received, length=");
+    // Serial.println(cb);
+    
     // We've received a packet, read the data from it
     udp.read(packetBuffer, NTP_PACKET_SIZE); // read the packet into the buffer
-
-    //the timestamp starts at byte 40 of the received packet and is four bytes,
-    // or two words, long. First, esxtract the two words:
-
+    
+    // Parse out the epoch
     unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
     unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
-    // combine the four bytes (two words) into a long integer
-    // this is NTP time (seconds since Jan 1 1900):
+    
+    // Convert response to epoch, and set it to the matrix printed string
     unsigned long secsSince1900 = highWord << 16 | lowWord;
-    //Serial.print("Seconds since Jan 1 1900 = " );
-    //Serial.println(secsSince1900);
-
-    // now convert NTP time into everyday time:
-    //Serial.print("Unix time = ");
-    // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
     const unsigned long seventyYears = 2208988800UL;
-    // subtract seventy years:
-    //unsigned long epoch = secsSince1900 - seventyYears;
     epoch = secsSince1900 - seventyYears;
     epoch = epoch + (hoursAdjust * 3600);
-    // print Unix time:
-    //Serial.println(epoch);
-
-    // Print it
-    //printTime(epoch);
-
   }
-  // wait ten seconds before asking for the time again
-  //delay(10000);
   printTimeForXSeconds(epoch, 60);
 }
 
-void printText() {
+void printTimeToMatrix() {
   // Fill background, set cursor, and print
   Matrix.fillScreen(BG_COLOR);
   Matrix.setCursor(SCROLL_PLACEHOLDER, 0);
-  Matrix.print(text);
+  Matrix.print(timeAsString);
 
   // Bump where we print from next
   if(--SCROLL_PLACEHOLDER < SCROLL_WIDTH){
@@ -139,9 +122,10 @@ void printText() {
 
   // Show it
   Matrix.show();
+  Serial.println("We are printing!");
 
   // Delay
-  delay(100);
+//   delay(100);
 }
 
 
@@ -164,27 +148,43 @@ String getHoursMinutesSecondsStringFromEpoch(long epoch) {
   return parsedTime;
 }
 
-void printTime(long epoch) {
-  // Get time string
-  String timeString = getHoursMinutesSecondsStringFromEpoch(epoch);
+void printTimeToSerial(long epoch) {
+  // Get time string and save it
+  timeAsString = getHoursMinutesSecondsStringFromEpoch(epoch);
 
   // Print it out
-  Serial.println("Current time: " + timeString);    
+  Serial.println("Time: " + timeAsString);
 }
 
 void printTimeForXSeconds(long epoch, int seconds) {
-  // Will print the time for ten seconds
-  
-  for(int x; x<seconds; x++) {
-    printTime(epoch);
-    epoch++;
-    delay(1000);
+  int startTime = millis();
+  while(millis() < startTime + 60) {
+    // Print it out to terminal every second
+    int terminalPrintCounter = startTime;
+    if(millis() > terminalPrintCounter + 1000) {
+        printTimeToSerial(epoch);
+        terminalPrintCounter = millis();
+    }
+
+    // Scroll the matrix
+    int matrixScrollCounter = startTime;
+    if(millis() > matrixScrollCounter + 100) {
+        printTimeToMatrix();
+        matrixScrollCounter = millis();
+    }
   }
+
+//   // Will print the time for ten seconds
+  
+//   for(int x; x<seconds; x++) {
+//     printTimeToSerial(epoch);
+//     epoch++;
+//     delay(1000);
+//   }
 }
 
 // send an NTP request to the time server at the given address
-unsigned long sendNTPpacket(IPAddress& address)
-{
+unsigned long sendNTPpacket(IPAddress& address) {
   Serial.println("sending NTP packet...");
   // set all bytes in the buffer to 0
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
