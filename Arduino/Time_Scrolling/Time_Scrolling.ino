@@ -34,8 +34,8 @@ int lastRefreshSeconds = millis() / 1000;
 String OUTPUT_STRING      = "00:00:00";
 int SCROLL_PLACEHOLDER    = Matrix.width();
 const int SCROLL_WIDTH    = -45; // This fits the width of "00:00:00"
-const uint16_t TEXT_COLOR = Matrix.Color(64,166,250); // whiteish blue color
-const uint16_t BG_COLOR   = Matrix.Color(0, 0, 0); // full red
+const uint16_t TEXT_COLOR = Matrix.Color(0, 0, 255); // full blue
+const uint16_t BG_COLOR   = Matrix.Color(0, 0, 0); // full off
 
 // Create a UDP instance
 IPAddress timeServerIP; // time.nist.gov NTP server address
