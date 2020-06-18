@@ -17,8 +17,8 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   );
 
 // WiFi and UTC adjust settings
-char ssid[]     = "SSID";
-char pass[]     = "PW";
+char ssid[]     = "WIFI_SSID";
+char pass[]     = "WIFI_PW";
 int hoursAdjust = -7; // UTC-7 = Pacific Time (Summer)
 
 // Time retrieval settings
@@ -31,11 +31,11 @@ byte packetBuffer[ NTP_PACKET_SIZE]; // Buffer to hold incoming and outgoing pac
 int lastRefreshSeconds = millis() / 1000;
 
 // Text display setup
-char text[]               = "00:00";
+String OUTPUT_STRING      = "00:00:00";
 int SCROLL_PLACEHOLDER    = Matrix.width();
-const int SCROLL_WIDTH    = -35; // This was fit to the width of "00:00"
+const int SCROLL_WIDTH    = -45; // This fits the width of "00:00:00"
 const uint16_t TEXT_COLOR = Matrix.Color(64,166,250); // whiteish blue color
-const uint16_t BG_COLOR   = Matrix.Color(255, 0, 0); // full red
+const uint16_t BG_COLOR   = Matrix.Color(0, 0, 0); // full red
 
 // Create a UDP instance
 IPAddress timeServerIP; // time.nist.gov NTP server address
@@ -110,11 +110,30 @@ void loop() {
   printTimeForXSeconds(epoch, 60);
 }
 
-void printText() {
+void printTimeForXSeconds(long epoch, int seconds) {
+  for(int x; x<seconds; x++) {
+    printTime(epoch);
+    for(int y=0; y<10; y++) {
+      matrixTextScroll();
+      delay(100);
+    }
+    epoch++;
+  }
+}
+
+void printTime(long epoch) { // Note that this should happen every 1000 milliseconds
+  // Get time string
+  OUTPUT_STRING = getHoursMinutesSecondsStringFromEpoch(epoch);
+
+  // Print it out
+  Serial.println("Current time: " + OUTPUT_STRING);    
+}
+
+void matrixTextScroll() { // Note that this should happen every 100 milliseconds
   // Fill background, set cursor, and print
   Matrix.fillScreen(BG_COLOR);
   Matrix.setCursor(SCROLL_PLACEHOLDER, 0);
-  Matrix.print(text);
+  Matrix.print(OUTPUT_STRING);
 
   // Bump where we print from next
   if(--SCROLL_PLACEHOLDER < SCROLL_WIDTH){
@@ -124,9 +143,6 @@ void printText() {
 
   // Show it
   Matrix.show();
-
-  // Delay
-  delay(100);
 }
 
 
@@ -147,24 +163,6 @@ String getHoursMinutesSecondsStringFromEpoch(long epoch) {
   parsedTime += ":";
   parsedTime += makeTimeDigitString(epoch % 60); // Seconds
   return parsedTime;
-}
-
-void printTime(long epoch) {
-  // Get time string
-  String timeString = getHoursMinutesSecondsStringFromEpoch(epoch);
-
-  // Print it out
-  Serial.println("Current time: " + timeString);    
-}
-
-void printTimeForXSeconds(long epoch, int seconds) {
-  // Will print the time for ten seconds
-  
-  for(int x; x<seconds; x++) {
-    printTime(epoch);
-    epoch++;
-    delay(1000);
-  }
 }
 
 unsigned long sendNTPpacket(IPAddress& address) {
