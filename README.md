@@ -1,24 +1,32 @@
 # rgb-led-light-board
 
 ![in-progress.gif](in-progress.gif)
-> Above is the board in its finished state.
+> Above is the most recent visualization for the board.
 
 ## About
 
-For now, please see [the most recent post on my blog about this project](https://github.com/ckuzma/blog/blob/master/posts/2020/2020-02-09-rgb-wall-display-board-part-2.md) for information about what I am working on and why.
+For now, please see [the most recent post on my blog about this project](https://github.com/ckuzma/blog/blob/master/posts/2020/2020-02-09-rgb-wall-display-board-part-2.md) for information about the board.
 
 ## Visual Routines
 
-### [PrettyColors](Arduino/RGBLedLightBoard_PrettyColors)
+### [NeoFire](https://github.com/ckuzma/NeoFire), a forked and ported project.
 
-### [Text](Arduino/RGBLedLightBoard_Text)
+> ![new_flame.gif](https://github.com/ckuzma/NeoFire/raw/master/new_fire.gif)
 
-### [USA Bright](Arduino/RGBLedLightBoard_USA_Bright)
+### [Pretty_Colors](Arduino/Pretty_Colors)
 
-### [Space_Invader](Arduino/RGBLedLightBoard_Space_Invader)
+>![pretty_colors.gif](Arduino/Pretty_Colors/pretty_colors.gif)
 
->![space_invader.gif](Arduino/RGBLedLightBoard_Space_Invader/space_invader.gif)
+### [Space_Invader](Arduino/Space_Invader)
 
-### [RGBLedLightBoard_NeoFire](https://github.com/ckuzma/RGBLedLightBoard_NeoFire)
+>![space_invader.gif](Arduino/Space_Invader/space_invader.gif)
 
-> ![new_flame.gif](https://github.com/ckuzma/RGBLedLightBoard_NeoFire/raw/master/new_fire.gif)
+### [Text_Scrolling_Static](Arduino/Text_Scrolling_Static)
+
+### [Text_Scrolling_Webapp](Arduino/Text_Scrolling_Webapp)
+
+### [Time_Scrolling](Arduino/Time_Scrolling)
+
+>![time_scrolling](Arduino/Time_Scrolling/time_scrolling.gif)
+
+### [USA Bright](Arduino/USA_Bright)
