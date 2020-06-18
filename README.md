@@ -21,12 +21,19 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 >![space_invader.gif](Arduino/Space_Invader/space_invader.gif)
 
+### [Static_Flag_USA](Arduino/Static_Flag_USA)
+
+>![static_flag_usa.jpg](Arduino/Static_Flag_USA/static_flag_usa.jpg)
+
 ### [Text_Scrolling_Static](Arduino/Text_Scrolling_Static)
+
+>![text_scrolling_static.gif](Arduino/Text_Scrolling_Static/text_scrolling_static.gif)
 
 ### [Text_Scrolling_Webapp](Arduino/Text_Scrolling_Webapp)
 
+>![text_scrolling_webapp.gif](Arduino/Text_Scrolling_Webapp/text_scrolling_webapp.gif)
+
 ### [Time_Scrolling](Arduino/Time_Scrolling)
 
->![time_scrolling](Arduino/Time_Scrolling/time_scrolling.gif)
+>![time_scrolling.gif](Arduino/Time_Scrolling/time_scrolling.gif)
 
-### [USA Bright](Arduino/USA_Bright)
