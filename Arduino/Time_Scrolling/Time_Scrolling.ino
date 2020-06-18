@@ -68,6 +68,7 @@ void setup() {
 
   Matrix.begin();
   Matrix.setTextWrap(false);
+  Matrix.setTextColor(TEXT_COLOR);
   Matrix.setBrightness(255);
 }
 
@@ -138,7 +139,6 @@ void matrixTextScroll() { // Note that this should happen every 100 milliseconds
   // Bump where we print from next
   if(--SCROLL_PLACEHOLDER < SCROLL_WIDTH){
     SCROLL_PLACEHOLDER = Matrix.width();
-    Matrix.setTextColor(TEXT_COLOR);
   }
 
   // Show it
