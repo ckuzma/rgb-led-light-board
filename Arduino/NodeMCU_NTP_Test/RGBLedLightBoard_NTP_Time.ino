@@ -17,8 +17,8 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   );
 
 // WiFi and UTC adjust settings
-char ssid[]     = "Festnetz";
-char pass[]     = "reutlingen";
+char ssid[]     = "Wave G Public WiFi";
+char pass[]     = "";
 int hoursAdjust = -7; // UTC-7 = Pacific Time (Summer)
 
 // Time retrieval settings
@@ -144,23 +144,32 @@ void printText() {
   delay(100);
 }
 
+
+String makeTimeDigitString(int timeDigit) {
+    if(timeDigit < 10) {
+        return "0" + String(timeDigit);
+    }
+    else {
+        return String(timeDigit);
+    }
+}
+
+String getHoursMinutesSecondsStringFromEpoch(long epoch) {
+  String parsedTime = "";
+  parsedTime += makeTimeDigitString((epoch  % 86400L) / 3600); // Hours
+  parsedTime += ":";
+  parsedTime += makeTimeDigitString((epoch  % 3600) / 60); // Minutes
+  parsedTime += ":";
+  parsedTime += makeTimeDigitString(epoch % 60); // Seconds
+  return parsedTime;
+}
+
 void printTime(long epoch) {
-  // Serial.print((epoch  % 86400L) / 3600); // print the hour (86400 equals secs per day)
-  int hours = (epoch  % 86400L) / 3600;
+  // Get time string
+  String timeString = getHoursMinutesSecondsStringFromEpoch(epoch);
 
-  // Serial.print((epoch  % 3600) / 60); // print the minute (3600 equals secs per minute)
-  int minutes = (epoch  % 3600) / 60;
-
-  // Serial.println(epoch % 60); // print the second
-  int seconds = epoch % 60;
-
-  Serial.println("Hours: ");
-  Serial.println(hours);
-  Serial.println("Minutes: ");
-  Serial.println(minutes);
-  Serial.println("Seconds: ");
-  Serial.println(seconds);
-    
+  // Print it out
+  Serial.println("Current time: " + timeString);    
 }
 
 void printTimeForXSeconds(long epoch, int seconds) {
