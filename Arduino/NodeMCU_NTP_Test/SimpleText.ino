@@ -5,7 +5,7 @@
 #define WIDTH 16
 #define HEIGHT 8
 
-// Array initialization
+// Array Setup
 Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   WIDTH, HEIGHT,
   PIN,
@@ -15,36 +15,34 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   );
 
 // Text setup
-char text[] = "18:55";
-const int scroll_width = -65;
-const int color_count = 1;
-const uint16_t colors[] = {
-  Matrix.Color(64,166,250)
- };
-
-// Some initial variable instantiations
-int x = Matrix.width();
-int pass = 0;
+char text[]               = "00:00";
+int SCROLL_PLACEHOLDER    = Matrix.width();
+const int SCROLL_WIDTH    = -35; // This was fit to the width of "00:00"
+const uint16_t TEXT_COLOR = Matrix.Color(64,166,250); // whiteish blue color
+const uint16_t BG_COLOR   = Matrix.Color(255, 0, 0); // full red
 
 void setup() {
   Matrix.begin();
   Matrix.setTextWrap(false);
   Matrix.setBrightness(255);
-  Matrix.setTextColor(colors[0]);
 }
 
 void printText(char text[]) {
-  Matrix.fillScreen(0);
-  Matrix.setCursor(x, 0);
+  // Fill background, set cursor, and print
+  Matrix.fillScreen(BG_COLOR);
+  Matrix.setCursor(SCROLL_PLACEHOLDER, 0);
   Matrix.print(text);
-  if(--x < scroll_width){
-    x = Matrix.width();
-    if(++pass >= color_count){
-      pass = 0;
-    }
-    Matrix.setTextColor(colors[pass]);
+
+  // Bump where we print from next
+  if(--SCROLL_PLACEHOLDER < SCROLL_WIDTH){
+    SCROLL_PLACEHOLDER = Matrix.width();
+    Matrix.setTextColor(TEXT_COLOR);
   }
+
+  // Show it
   Matrix.show();
+
+  // Delay
   delay(100);
 }
 
