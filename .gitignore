@@ -1,2 +1,3 @@
 *.Identifier
 .DS_STORE
+.vscode/
