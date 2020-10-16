@@ -9,7 +9,7 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 ## Visual Routines
 
-### [NeoFire](https://github.com/ckuzma/NeoFire), a forked and ported project.
+### [NeoFire](https://github.com/ckuzma/NeoFire)
 
 > ![new_flame.gif](https://github.com/ckuzma/NeoFire/raw/master/new_fire.gif)
 
