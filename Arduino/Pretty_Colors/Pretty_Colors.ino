@@ -1,4 +1,5 @@
 #include <Adafruit_NeoMatrix.h>
+#include <ESP8266WiFi.h>
 
 // Change these to fit your setup
 #define PIN D3
@@ -29,6 +30,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   );
   
 void setup() {
+  WiFi.mode(WIFI_OFF);
   Serial.begin(115200);
   Serial.println("Booting");
     

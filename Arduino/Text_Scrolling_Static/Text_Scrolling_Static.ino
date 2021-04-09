@@ -1,4 +1,5 @@
 #include <Adafruit_NeoMatrix.h>
+#include <ESP8266WiFi.h>
 
 // Change these to fit your setup
 #define PIN D3
@@ -31,6 +32,7 @@ int x = Matrix.width();
 int pass = 0;
 
 void setup() {
+  WiFi.mode(WIFI_OFF);
   Matrix.begin();
   Matrix.setTextWrap(false);
   Matrix.setBrightness(255);
