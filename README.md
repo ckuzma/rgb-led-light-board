@@ -35,5 +35,5 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 ### [Time_Scrolling](Arduino/Time_Scrolling)
 
->![time_scrolling.gif](Arduino/Time_Scrolling/time_scrolling.gif)
+>![time_scrolling.gif](in-progress.gif)
 
