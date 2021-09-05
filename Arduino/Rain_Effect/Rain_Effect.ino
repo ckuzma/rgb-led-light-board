@@ -1,28 +1,77 @@
+#include <Adafruit_NeoMatrix.h>
 #include <ESP8266WiFi.h>
 
 // Change these to fit your setup
+#define PIN D3
 #define WIDTH 16
 #define HEIGHT 8
 
-// Create our working array
+// Changes behavior of the drops
+const int maxDrops = 6; // Maximum possible drops on-display
+const int frameDelay = 100; // Time between visualization "frame" updates
+const int dropProbability = 20; // Percentage likelihood of a drop happening
+
+// Change this to match the desired colors and brightness
+// to display.  The number of colors and ordering here
+// corresponds to colorProgressionCount and colorProgression
+// below in the rain code.
+const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
+const int colorMap[5][3] = {
+  {0, 0, 0},
+  {27, 42, 102},
+  {48, 74, 178},
+  {62, 95, 228},
+  {71, 108, 255}
+};
+
+// Init and config an internal data array plus the NeoMatrix
+Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
+  WIDTH, HEIGHT,
+  PIN,
+  NEO_MATRIX_BOTTOM + NEO_MATRIX_RIGHT +
+  NEO_MATRIX_ROWS   + NEO_MATRIX_ZIGZAG,
+  NEO_GRB           + NEO_KHZ800
+  );
+
+void setup() {
+  WiFi.mode(WIFI_OFF);
+  Serial.begin(115200);
+
+  // Initialize the matrix
+  Matrix.begin();
+  Matrix.setBrightness(BRIGHTNESS);
+}
+
+// ------------------------------------ //
+// --- Below is code for the board ---- //
+// ------------------------------------ //
+
+void displayOnBoard() {
+  for(int x = 0; x < WIDTH; x++){
+    for(int y = 0; y < HEIGHT; y++) {
+      Matrix.drawPixel(x, y,Matrix.Color(colorMap[fictionalBoard[y][x]][0], colorMap[fictionalBoard[y][x]][1], colorMap[fictionalBoard[y][x]][2]));
+    }
+  }
+  Matrix.show();
+}
+
+// ------------------------------------ //
+// --- Below is rain-specific code ---- //
+// ------------------------------------ //
+
+// Create our "fictional" board for Serial printing and ease-of-coding
 int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0
 
 // Set the color number progressions
 const int colorProgressionCount = 5;
 const int colorProgression[colorProgressionCount] = {4, 3, 2, 1, 0};
-const int maxDrops = 2;
-
-void setup() {
-  WiFi.mode(WIFI_OFF);
-  Serial.begin(115200);
-}
 
 int pickRandomColumn() {
   return random(0, WIDTH);  
 }
 
 bool pickRandomDo() {
-  if(random(0, 100) < 10) {
+  if(random(0, 100) < dropProbability) {
     return true;
   }
   return false;
@@ -69,7 +118,7 @@ void dropDrops() {
   }
 }
 
-void prettyPrintBoard() {
+void serialPrintBoard() {
   Serial.println("--------------------------------");
   for(int y=0; y<HEIGHT; y++) {
     for(int x=0; x<WIDTH; x++) {
@@ -90,7 +139,8 @@ void iterateDrops() {
 }
 
 void loop() {
-  prettyPrintBoard();
+  // serialPrintBoard();
+  displayOnBoard();
   iterateDrops();
-  delay(500);
+  delay(frameDelay);
 }
