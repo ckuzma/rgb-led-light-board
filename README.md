@@ -17,6 +17,10 @@ For now, please see [the most recent post on my blog about this project](https:/
 
 >![pretty_colors.gif](Arduino/Pretty_Colors/pretty_colors.gif)
 
+### [Rain_Effect](Arduino/Rain_Effect)
+
+>![rain_effect.gif](Arduino/Rain_Effect/rain_effect.gif)
+
 ### [Space_Invader](Arduino/Space_Invader)
 
 >![space_invader.gif](Arduino/Space_Invader/space_invader.gif)
