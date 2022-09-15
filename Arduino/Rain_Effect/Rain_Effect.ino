@@ -16,13 +16,27 @@ const int dropProbability = 20; // Percentage likelihood of a drop happening
 // corresponds to colorProgressionCount and colorProgression
 // below in the rain code.
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
+
+// Soft-white rain
 const int colorMap[5][3] = {
   {0, 0, 0},
-  {27, 42, 102},
-  {48, 74, 178},
-  {62, 95, 228},
-  {71, 108, 255}
+  {70, 30, 30},
+  {102, 92, 82},
+  {228, 218, 208},
+  {255, 245, 235}
 };
+
+// Blue rain
+//const int colorMap[5][3] = {
+//  {0, 0, 0},
+//  {27, 42, 102},
+//  {48, 74, 178},
+//  {62, 95, 228},
+//  {71, 108, 255}
+//};
+
+// Create our "fictional" board for Serial printing and ease-of-coding
+int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0
 
 // Init and config an internal data array plus the NeoMatrix
 Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
@@ -32,15 +46,6 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_MATRIX_ROWS   + NEO_MATRIX_ZIGZAG,
   NEO_GRB           + NEO_KHZ800
   );
-
-void setup() {
-  WiFi.mode(WIFI_OFF);
-  Serial.begin(115200);
-
-  // Initialize the matrix
-  Matrix.begin();
-  Matrix.setBrightness(BRIGHTNESS);
-}
 
 // ------------------------------------ //
 // --- Below is code for the board ---- //
@@ -58,9 +63,6 @@ void displayOnBoard() {
 // ------------------------------------ //
 // --- Below is rain-specific code ---- //
 // ------------------------------------ //
-
-// Create our "fictional" board for Serial printing and ease-of-coding
-int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0
 
 // Set the color number progressions
 const int colorProgressionCount = 5;
@@ -136,6 +138,20 @@ void iterateDrops() {
       fictionalBoard[0][pickRandomColumn()] = colorProgression[0];
     }
   }
+}
+
+
+// ------------------------------------ //
+// --- Below is standard Arduino   ---- //
+// ------------------------------------ //
+
+void setup() {
+  WiFi.mode(WIFI_OFF);
+  Serial.begin(115200);
+
+  // Initialize the matrix
+  Matrix.begin();
+  Matrix.setBrightness(BRIGHTNESS);
 }
 
 void loop() {

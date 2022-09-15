@@ -11,16 +11,16 @@
 // different color options, change 5 in the
 // initialization for prettyColors
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
-const int delayTime = 160; // 80 = faster default
+const int delayTime = 320; // 80 = original faster default
 
-// https://www.schemecolor.com/going-up.php
+// Modified version of: https://www.schemecolor.com/going-up.php
 const int numberOfColors = 11;
 const int prettyColors[numberOfColors][3] = {
-  {75, 19, 81},
+  {137, 28, 149},
   {172, 49, 75},
   {223, 229, 228},
   {32, 130, 174},
-  {40, 85, 153},
+  {26, 87, 179},
   {224, 171, 86},
   {0, 0, 0},
   {0, 0, 0},
