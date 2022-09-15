@@ -11,13 +11,32 @@
 // different color options, change 5 in the
 // initialization for prettyColors
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
-const int prettyColors[5][3] = {
-  {37, 37, 218}, // Bright blue
-  {17, 17, 110}, // Darker blue
+const int delayTime = 160; // 80 = faster default
+
+// https://www.schemecolor.com/going-up.php
+const int numberOfColors = 11;
+const int prettyColors[numberOfColors][3] = {
+  {75, 19, 81},
+  {172, 49, 75},
+  {223, 229, 228},
+  {32, 130, 174},
+  {40, 85, 153},
+  {224, 171, 86},
+  {0, 0, 0},
+  {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0}
 };
+
+
+//const int prettyColors[numberOfColors][3] = {
+//  {37, 37, 218}, // Bright blue
+//  {17, 17, 110}, // Darker blue
+//  {0, 0, 0},
+//  {0, 0, 0},
+//  {0, 0, 0}
+//};
 
 // Init and config an internal data array plus the NeoMatrix
 int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
@@ -66,7 +85,7 @@ void makePrettyColors() {
   int y = random(WIDTH);
 
   // Pick a color and change the pixel
-  int colorNumber = random(5);
+  int colorNumber = random(numberOfColors);
   changePixel(x, y, prettyColors[colorNumber][0], prettyColors[colorNumber][1], prettyColors[colorNumber][2]);
 }
 
@@ -77,5 +96,5 @@ void loop() {
   // Display it!
   displayBoard();
 
-  delay(80);
+  delay(delayTime);
 }
