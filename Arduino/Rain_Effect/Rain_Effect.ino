@@ -10,6 +10,7 @@
 const int maxDrops = 6; // Maximum possible drops on-display
 const int frameDelay = 100; // Time between visualization "frame" updates
 const int dropProbability = 20; // Percentage likelihood of a drop happening
+const bool moveHorizontal = true; // Move drops horizontally or not
 
 // Change this to match the desired colors and brightness
 // to display.  The number of colors and ordering here
@@ -18,13 +19,13 @@ const int dropProbability = 20; // Percentage likelihood of a drop happening
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 
 // Soft-white rain
-const int colorMap[5][3] = {
-  {0, 0, 0},
-  {70, 30, 30},
-  {102, 92, 82},
-  {228, 218, 208},
-  {255, 245, 235}
-};
+//const int colorMap[5][3] = {
+//  {0, 0, 0},
+//  {70, 30, 30},
+//  {102, 92, 82},
+//  {228, 218, 208},
+//  {255, 245, 235}
+//};
 
 // Blue rain
 //const int colorMap[5][3] = {
@@ -34,6 +35,15 @@ const int colorMap[5][3] = {
 //  {62, 95, 228},
 //  {71, 108, 255}
 //};
+
+// Red rain
+const int colorMap[5][3] = {
+  {0, 0, 0},
+  {102, 5, 5},
+  {178, 15, 15},
+  {228, 20, 20},
+  {255, 40, 40}
+};
 
 // Create our "fictional" board for Serial printing and ease-of-coding
 int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0
@@ -69,7 +79,12 @@ const int colorProgressionCount = 5;
 const int colorProgression[colorProgressionCount] = {4, 3, 2, 1, 0};
 
 int pickRandomColumn() {
-  return random(0, WIDTH);  
+  if(moveHorizontal == false) {
+    return random(0, WIDTH);
+  }
+  else { // aka moveHorizontal == true
+    return random(0, HEIGHT);
+  }
 }
 
 bool pickRandomDo() {
@@ -112,10 +127,18 @@ int getNextColor(int previousColor) {
 void dropDrops() {
   for(int x=WIDTH-1; x>=0; x--) {
     for(int y=HEIGHT-1; y>=0; y--) {
-      if(fictionalBoard[y][x] == colorProgression[0] && y != HEIGHT-1) {
-        fictionalBoard[y+1][x] = colorProgression[0];
+      if(moveHorizontal == false) {
+        if(fictionalBoard[y][x] == colorProgression[0] && y != HEIGHT-1) {
+          fictionalBoard[y+1][x] = colorProgression[0];
+        }
+        fictionalBoard[y][x] = getNextColor(fictionalBoard[y][x]);
       }
-      fictionalBoard[y][x] = getNextColor(fictionalBoard[y][x]);
+      else { // aka moveHorizontal == true
+        if(fictionalBoard[y][x] == colorProgression[0] && x != WIDTH-1) {
+          fictionalBoard[y][x+1] = colorProgression[0];
+        }
+        fictionalBoard[y][x] = getNextColor(fictionalBoard[y][x]);
+      }
     }
   }
 }
@@ -135,7 +158,12 @@ void iterateDrops() {
   dropDrops();
   if(countOccupiedColumns() < maxDrops) {
     if(pickRandomDo()) {
-      fictionalBoard[0][pickRandomColumn()] = colorProgression[0];
+      if(moveHorizontal == false) {
+        fictionalBoard[0][pickRandomColumn()] = colorProgression[0];
+      }
+      else { // aka moveHorizontal == true
+        fictionalBoard[pickRandomColumn()][0] = colorProgression[0];
+      }
     }
   }
 }
