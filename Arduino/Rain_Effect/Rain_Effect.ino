@@ -18,16 +18,16 @@ const bool moveHorizontal = true; // Move drops horizontally or not
 // below in the rain code.
 const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 
-// Soft-white rain
-//const int colorMap[5][3] = {
-//  {0, 0, 0},
-//  {70, 30, 30},
-//  {102, 92, 82},
-//  {228, 218, 208},
-//  {255, 245, 235}
-//};
+// Soft-white (not blue-ish)
+const int colorMap[5][3] = {
+  {0, 0, 0},
+  {70, 30, 30},
+  {102, 92, 82},
+  {228, 218, 208},
+  {255, 245, 235}
+};
 
-// Blue rain
+// Blue
 //const int colorMap[5][3] = {
 //  {0, 0, 0},
 //  {27, 42, 102},
@@ -36,14 +36,14 @@ const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 //  {71, 108, 255}
 //};
 
-// Red rain
-const int colorMap[5][3] = {
-  {0, 0, 0},
-  {102, 5, 5},
-  {178, 15, 15},
-  {228, 20, 20},
-  {255, 40, 40}
-};
+// Red
+//const int colorMap[5][3] = {
+//  {0, 0, 0},
+//  {102, 5, 5},
+//  {178, 15, 15},
+//  {228, 20, 20},
+//  {255, 40, 40}
+//};
 
 // Create our "fictional" board for Serial printing and ease-of-coding
 int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0
