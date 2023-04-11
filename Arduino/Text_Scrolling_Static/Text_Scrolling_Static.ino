@@ -1,5 +1,18 @@
-#include <Adafruit_NeoMatrix.h>
+// Arduino OTA stuff
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+#ifndef STASSID
+#define STASSID "...."
+#define STAPSK "...."
+#endif
+const char* ssid = STASSID;
+const char* password = STAPSK;
+const char* host = "OTA-RGB-LED-LightBoard";
+
+// NeoMatrix stuff
+#include <Adafruit_NeoMatrix.h>
 
 // Change these to fit your setup
 #define PIN D3
@@ -32,7 +45,18 @@ int x = Matrix.width();
 int pass = 0;
 
 void setup() {
-  WiFi.mode(WIFI_OFF);
+  // Get WiFi up and going for OTA purposes
+  Serial.begin(115200);
+  Serial.println("Booting");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    WiFi.begin(ssid, password);
+    Serial.println("Retrying connection...");
+  }
+  ArduinoOTA.setHostname(host);
+  ArduinoOTA.begin();
+
   Matrix.begin();
   Matrix.setTextWrap(false);
   Matrix.setBrightness(255);
@@ -40,6 +64,7 @@ void setup() {
 }
 
 void loop() {
+  ArduinoOTA.handle();
   Matrix.fillScreen(0);
   Matrix.setCursor(x, 0);
   Matrix.print(text);

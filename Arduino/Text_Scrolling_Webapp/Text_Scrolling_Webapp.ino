@@ -1,8 +1,23 @@
 // Originally found here:
 // https://www.youtube.com/watch?v=TfzFJkDgg7s
 
+// Arduino OTA stuff
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+#ifndef STASSID
+#define STASSID "...."
+#define STAPSK "...."
+#endif
+const char* ssid = STASSID;
+const char* password = STAPSK;
+const char* host = "OTA-RGB-LED-LightBoard";
+
+// NeoMatrix stuff
 #include <Adafruit_NeoMatrix.h>
+
+// HTML page stuff
 #include "TextPageHTML.h"
 
 // Setup for our particular display
@@ -11,8 +26,6 @@
 #define HEIGHT 8
 
 // WiFi settings and text color
-const char* ssid     = "WIFI_2.4GHZ_SSID";
-const char* password = "WIFI_PASSWORD";
 const int red   = 255;
 const int green = 255;
 const int blue  = 255;
@@ -39,26 +52,23 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
 int x = Matrix.width();
 
 void setup() {
+  // Get WiFi up and going for OTA purposes
   Serial.begin(115200);
+  Serial.println("Booting");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    WiFi.begin(ssid, password);
+    Serial.println("Retrying connection...");
+  }
+  ArduinoOTA.setHostname(host);
+  ArduinoOTA.begin();
 
   // Initialize the matrix
   Matrix.begin();
   Matrix.setTextWrap(false);
   Matrix.setBrightness(255);
   Matrix.setTextColor(Matrix.Color(red, green, blue));
-
-  // Connect to WiFi
-  Serial.println();
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("");
-  Serial.println("WiFi connected");
   
   // Start server
   server.begin();
@@ -69,6 +79,7 @@ void setup() {
 }
 
 void loop() {
+  ArduinoOTA.handle();
   // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) {

@@ -1,5 +1,20 @@
-#include <Adafruit_NeoMatrix.h>
+// Arduino OTA stuff
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+#ifndef STASSID
+#define STASSID "...."
+#define STAPSK "...."
+#endif
+const char* ssid = STASSID;
+const char* password = STAPSK;
+const char* host = "OTA-RGB-LED-LightBoard";
+
+// NeoMatrix stuff
+#include <Adafruit_NeoMatrix.h>
+
+// UDP stuff
 #include <WiFiUdp.h>
 
 // Change these to fit your setup
@@ -16,9 +31,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_GRB           + NEO_KHZ800
   );
 
-// WiFi and UTC adjust settings
-char ssid[]     = "WIFI_SSID";
-char pass[]     = "WIFI_PW";
+// UTC adjust setting
 int hoursAdjust = -7; // UTC-7 = Pacific Time (Summer)
 
 // Time retrieval settings
@@ -42,20 +55,20 @@ IPAddress timeServerIP; // time.nist.gov NTP server address
 WiFiUDP udp;
 
 void setup() {
+  // Get WiFi up and going for OTA purposes
   Serial.begin(115200);
-  Serial.println();
-  Serial.println();
-
-  // We start by connecting to a WiFi network
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pass);
-  
-  while(WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  Serial.println("Booting");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    WiFi.begin(ssid, password);
+    Serial.println("Retrying connection...");
   }
-  Serial.println("");
+  ArduinoOTA.setHostname(host);
+  ArduinoOTA.begin();
+
+  Serial.println();
+  Serial.println();
   
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
@@ -73,6 +86,7 @@ void setup() {
 }
 
 void loop() {
+  ArduinoOTA.handle();
   // Place to save epoch
   unsigned long epoch;
   
@@ -165,7 +179,7 @@ String getHoursMinutesSecondsStringFromEpoch(long epoch) {
   return parsedTime;
 }
 
-unsigned long sendNTPpacket(IPAddress& address) {
+void sendNTPpacket(IPAddress& address) {
   Serial.println("Sending an NTP packet request...");
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
   packetBuffer[0] = 0b11100011;   // LI, Version, Mode
