@@ -3,10 +3,9 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-#ifndef STASSID
-#define STASSID "...."
-#define STAPSK "...."
-#endif
+
+// Get configuration values
+#include "config.h"
 const char* ssid = STASSID;
 const char* password = STAPSK;
 const char* host = "OTA-RGB-LED-LightBoard";

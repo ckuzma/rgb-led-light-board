@@ -1,15 +1,19 @@
 // Arduino OTA stuff
+// Note that this appears to be a bit buggy right now
+// so updates via USB cable may be necessary.
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-#ifndef STASSID
-#define STASSID "...."
-#define STAPSK "...."
-#endif
+
+// Get configuration values
+#include "config.h"
 const char* ssid = STASSID;
 const char* password = STAPSK;
 const char* host = "OTA-RGB-LED-LightBoard";
+
+// UTC adjust setting
+int hoursAdjust = -3; // UTC-5 = Eastern Time (Summer)
 
 // NeoMatrix stuff
 #include <Adafruit_NeoMatrix.h>
@@ -30,9 +34,6 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_MATRIX_ROWS   + NEO_MATRIX_ZIGZAG,
   NEO_GRB           + NEO_KHZ800
   );
-
-// UTC adjust setting
-int hoursAdjust = -7; // UTC-7 = Pacific Time (Summer)
 
 // Time retrieval settings
 const int localPort = 2390; // Port for UDP packets
