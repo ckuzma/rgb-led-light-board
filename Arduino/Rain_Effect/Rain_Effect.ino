@@ -22,40 +22,40 @@ const char* host = "OTA-RGB-LED-LightBoard";
 const int maxDrops = 6; // Maximum possible drops on-display
 const int frameDelay = 100; // Time between visualization "frame" updates
 const int dropProbability = 20; // Percentage likelihood of a drop happening
-const bool moveHorizontal = true; // Move drops horizontally or not
+const bool moveHorizontal = false; // Move drops horizontally or not
 
 // Change this to match the desired colors and brightness
 // to display.  The number of colors and ordering here
 // corresponds to colorProgressionCount and colorProgression
 // below in the rain code.
-const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
+const int BRIGHTNESS = 50;  // 0 = off, 255 = full brightness
 
 // Soft-white (not blue-ish)
-const int colorMap[5][3] = {
-  {0, 0, 0},
-  {70, 30, 30},
-  {102, 92, 82},
-  {228, 218, 208},
-  {255, 245, 235}
-};
+// const int colorMap[5][3] = {
+//   {0, 0, 0},
+//   {70, 30, 30},
+//   {102, 92, 82},
+//   {228, 218, 208},
+//   {255, 245, 235}
+// };
 
 // Blue
-//const int colorMap[5][3] = {
-//  {0, 0, 0},
-//  {27, 42, 102},
-//  {48, 74, 178},
-//  {62, 95, 228},
-//  {71, 108, 255}
-//};
+const int colorMap[5][3] = {
+ {0, 0, 0},
+ {27, 42, 102},
+ {48, 74, 178},
+ {62, 95, 228},
+ {71, 108, 255}
+};
 
 // Red
-//const int colorMap[5][3] = {
+// const int colorMap[5][3] = {
 //  {0, 0, 0},
 //  {102, 5, 5},
 //  {178, 15, 15},
 //  {228, 20, 20},
 //  {255, 40, 40}
-//};
+// };
 
 // Create our "fictional" board for Serial printing and ease-of-coding
 int fictionalBoard[HEIGHT][WIDTH]; // By not declaring a value, all cells have a value of 0

@@ -23,6 +23,9 @@ const char* host = "OTA-RGB-LED-LightBoard";
 #define MATRIX_WIDTH 16
 #define MATRIX_HEIGHT 8
 
+// Brightness adjustment
+const int BRIGHTNESS = 100;  // 0 = off, 255 = full brightness
+
 // Initialize the matrix
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(
   MATRIX_WIDTH, MATRIX_HEIGHT,
@@ -175,6 +178,7 @@ void setup() {
   ArduinoOTA.begin();
 
   matrix.begin();
+  matrix.setBrightness(BRIGHTNESS);
   randomSeed(analogRead(0));
   generateLine();
   //init all pixels to zero

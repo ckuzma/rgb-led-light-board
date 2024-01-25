@@ -27,9 +27,21 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   NEO_GRB           + NEO_KHZ800
   );
 
-// Text setup
-const char text[] = "happy hour";
-const int scroll_width = -65;
+// Text setup 1
+// const char text[] = "happy hour";
+// const int scroll_width = -65;
+// const int color_count = 5;
+// const uint16_t colors[] = {
+//   Matrix.Color(255,186,21),
+//   Matrix.Color(249,251,79),
+//   Matrix.Color(19,249,246),
+//   Matrix.Color(64,166,250),
+//   Matrix.Color(240,61,248)
+//  };
+
+ // Text setup 2
+const char text[] = "happy new year";
+const int scroll_width = -100;
 const int color_count = 5;
 const uint16_t colors[] = {
   Matrix.Color(255,186,21),
