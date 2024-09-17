@@ -26,22 +26,23 @@ const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 const int delayTime = 320; // 80 = original faster default
 
 // Modified version of: https://www.schemecolor.com/going-up.php
-const int numberOfColors = 11;
-const int prettyColors[numberOfColors][3] = {
-  {137, 28, 149},
-  {172, 49, 75},
-  {223, 229, 228},
-  {32, 130, 174},
-  {26, 87, 179},
-  {224, 171, 86},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0}
-};
+// const int numberOfColors = 11;
+// const int prettyColors[numberOfColors][3] = {
+//   {137, 28, 149},
+//   {172, 49, 75},
+//   {223, 229, 228},
+//   {32, 130, 174},
+//   {26, 87, 179},
+//   {224, 171, 86},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0}
+// };
 
-
+// Basic blue color version
+// const int numberOfColors = 5;
 //const int prettyColors[numberOfColors][3] = {
 //  {37, 37, 218}, // Bright blue
 //  {17, 17, 110}, // Darker blue
@@ -49,6 +50,16 @@ const int prettyColors[numberOfColors][3] = {
 //  {0, 0, 0},
 //  {0, 0, 0}
 //};
+
+// Basic white color version
+const int numberOfColors = 5;
+const int prettyColors[numberOfColors][3] = {
+ {255, 255, 255}, // Bright white
+ {100, 100, 100}, // Darker white
+ {0, 0, 0},
+ {0, 0, 0},
+ {0, 0, 0}
+};
 
 // Init and config an internal data array plus the NeoMatrix
 int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};
