@@ -28,6 +28,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
   );
 
 // Text setup 1
+// const int scroll_speed = 500;
 // const char text[] = "happy hour";
 // const int scroll_width = -65;
 // const int color_count = 5;
@@ -40,6 +41,7 @@ Adafruit_NeoMatrix Matrix = Adafruit_NeoMatrix(
 //  };
 
  // Text setup 2
+const int scroll_speed = 250;
 const char text[] = "happy new year";
 const int scroll_width = -100;
 const int color_count = 5;
@@ -87,5 +89,5 @@ void loop() {
     Matrix.setTextColor(colors[pass]);
   }
   Matrix.show();
-  delay(100);
+  delay(scroll_speed);
 }
