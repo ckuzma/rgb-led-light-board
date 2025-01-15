@@ -23,8 +23,9 @@ const char* host = "OTA-RGB-LED-LightBoard";
 #define MATRIX_WIDTH 16
 #define MATRIX_HEIGHT 8
 
-// Brightness adjustment
+// Brightness/speed adjustment
 const int BRIGHTNESS = 100;  // 0 = off, 255 = full brightness
+const int FRAME_DELAY = 60; // 60 is pretty calm
 
 // Initialize the matrix
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(
@@ -194,6 +195,6 @@ void loop() {
   }
   drawFrame(pcnt);
   matrix.show();
-  delay(40);
+  delay(FRAME_DELAY);
   pcnt+=30;
 }
