@@ -41,14 +41,60 @@ const int delayTime = 320; // 80 = original faster default
 //   {0, 0, 0}
 // };
 
-// Fall colors
-const int numberOfColors = 10;
+// Fall colors # 1
+// const int numberOfColors = 10;
+// const int prettyColors[numberOfColors][3] = {
+//   {167, 147, 148}, // Light gray/brown
+//   {100, 69, 49}, // Brown
+//   {220, 91, 37}, // Orange
+//   {192, 37, 4}, // Red
+//   {71, 84, 59}, // Olive green
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0}
+// };
+
+// Fall colors # 2 - Same as #1 above, just with less lights illuminated at once
+// const int numberOfColors = 14;
+// const int prettyColors[numberOfColors][3] = {
+//   {167, 147, 148}, // Light gray/brown
+//   {100, 69, 49}, // Brown
+//   {220, 91, 37}, // Orange
+//   {192, 37, 4}, // Red
+//   {71, 84, 59}, // Olive green
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0}
+// };
+
+// Fall colors # 3 - Same as #2 above, just with even less lights illuminated at once
+const int numberOfColors = 22;
 const int prettyColors[numberOfColors][3] = {
   {167, 147, 148}, // Light gray/brown
   {100, 69, 49}, // Brown
   {220, 91, 37}, // Orange
   {192, 37, 4}, // Red
   {71, 84, 59}, // Olive green
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0},
   {0, 0, 0},
