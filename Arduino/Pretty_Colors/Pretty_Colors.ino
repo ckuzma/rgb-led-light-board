@@ -41,25 +41,40 @@ const int delayTime = 320; // 80 = original faster default
 //   {0, 0, 0}
 // };
 
+// Fall colors
+const int numberOfColors = 10;
+const int prettyColors[numberOfColors][3] = {
+  {167, 147, 148}, // Light gray/brown
+  {100, 69, 49}, // Brown
+  {220, 91, 37}, // Orange
+  {192, 37, 4}, // Red
+  {71, 84, 59}, // Olive green
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0}
+};
+
 // Basic blue color version
 // const int numberOfColors = 5;
-//const int prettyColors[numberOfColors][3] = {
+// const int prettyColors[numberOfColors][3] = {
 //  {37, 37, 218}, // Bright blue
 //  {17, 17, 110}, // Darker blue
 //  {0, 0, 0},
 //  {0, 0, 0},
 //  {0, 0, 0}
-//};
+// };
 
 // Basic white color version
-const int numberOfColors = 5;
-const int prettyColors[numberOfColors][3] = {
- {255, 255, 255}, // Bright white
- {100, 100, 100}, // Darker white
- {0, 0, 0},
- {0, 0, 0},
- {0, 0, 0}
-};
+// const int numberOfColors = 5;
+// const int prettyColors[numberOfColors][3] = {
+//  {255, 255, 255}, // Bright white
+//  {100, 100, 100}, // Darker white
+//  {0, 0, 0},
+//  {0, 0, 0},
+//  {0, 0, 0}
+// };
 
 // Init and config an internal data array plus the NeoMatrix
 int displayArray[HEIGHT][WIDTH][3] = {{0, 0, 0}};

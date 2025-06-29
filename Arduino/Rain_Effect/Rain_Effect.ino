@@ -28,7 +28,7 @@ const bool moveHorizontal = false; // Move drops horizontally or not
 // to display.  The number of colors and ordering here
 // corresponds to colorProgressionCount and colorProgression
 // below in the rain code.
-const int BRIGHTNESS = 50;  // 0 = off, 255 = full brightness
+const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
 
 // Soft-white (not blue-ish)
 // const int colorMap[5][3] = {
@@ -39,7 +39,7 @@ const int BRIGHTNESS = 50;  // 0 = off, 255 = full brightness
 //   {255, 245, 235}
 // };
 
-// Blue
+// // Blue
 const int colorMap[5][3] = {
  {0, 0, 0},
  {27, 42, 102},
