@@ -76,31 +76,31 @@ const int delayTime = 320; // 80 = original faster default
 // };
 
 // Fall colors # 3 - Same as #2 above, just with even less lights illuminated at once
-const int numberOfColors = 22;
-const int prettyColors[numberOfColors][3] = {
-  {167, 147, 148}, // Light gray/brown
-  {100, 69, 49}, // Brown
-  {220, 91, 37}, // Orange
-  {192, 37, 4}, // Red
-  {71, 84, 59}, // Olive green
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0},
-  {0, 0, 0}
-};
+// const int numberOfColors = 22;
+// const int prettyColors[numberOfColors][3] = {
+//   {167, 147, 148}, // Light gray/brown
+//   {100, 69, 49}, // Brown
+//   {220, 91, 37}, // Orange
+//   {192, 37, 4}, // Red
+//   {71, 84, 59}, // Olive green
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0},
+//   {0, 0, 0}
+// };
 
 // Basic blue color version
 // const int numberOfColors = 5;
@@ -111,6 +111,18 @@ const int prettyColors[numberOfColors][3] = {
 //  {0, 0, 0},
 //  {0, 0, 0}
 // };
+
+// Daylight blue color version
+const int numberOfColors = 7;
+const int prettyColors[numberOfColors][3] = {
+ {0, 0, 255}, // Bright blue
+ {0, 0, 255}, // Darker blue
+ {0, 0, 0},
+ {0, 0, 0},
+ {0, 0, 0},
+ {0, 0, 0},
+ {0, 0, 0}
+};
 
 // Basic white color version
 // const int numberOfColors = 5;
