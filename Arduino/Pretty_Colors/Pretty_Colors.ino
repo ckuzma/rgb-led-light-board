@@ -22,7 +22,7 @@ const char* host = "OTA-RGB-LED-LightBoard";
 // to display.  If using more/less than 5
 // different color options, change 5 in the
 // initialization for prettyColors
-const int BRIGHTNESS = 255;  // 0 = off, 255 = full brightness
+const int BRIGHTNESS = 150;  // 0 = off, 255 = full brightness, 150 = pretty decent for night
 const int delayTime = 320; // 80 = original faster default
 
 // Modified version of: https://www.schemecolor.com/going-up.php
@@ -40,6 +40,31 @@ const int delayTime = 320; // 80 = original faster default
 //   {0, 0, 0},
 //   {0, 0, 0}
 // };
+
+// Same as above just less lights on at once
+const int numberOfColors = 20;
+const int prettyColors[numberOfColors][3] = {
+  {137, 28, 149},
+  {172, 49, 75},
+  {223, 229, 228},
+  {32, 130, 174},
+  {26, 87, 179},
+  {224, 171, 86},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0},
+  {0, 0, 0}
+};
 
 // Fall colors # 1
 // const int numberOfColors = 10;
@@ -113,16 +138,16 @@ const int delayTime = 320; // 80 = original faster default
 // };
 
 // Daylight blue color version
-const int numberOfColors = 7;
-const int prettyColors[numberOfColors][3] = {
- {0, 0, 255}, // Bright blue
- {0, 0, 255}, // Darker blue
- {0, 0, 0},
- {0, 0, 0},
- {0, 0, 0},
- {0, 0, 0},
- {0, 0, 0}
-};
+// const int numberOfColors = 7;
+// const int prettyColors[numberOfColors][3] = {
+//  {0, 0, 255}, // Bright blue
+//  {0, 0, 255}, // Darker blue
+//  {0, 0, 0},
+//  {0, 0, 0},
+//  {0, 0, 0},
+//  {0, 0, 0},
+//  {0, 0, 0}
+// };
 
 // Basic white color version
 // const int numberOfColors = 5;
